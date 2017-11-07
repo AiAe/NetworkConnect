@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>18-ти блок статистика за стая 1312</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="author" content="Daniel Dimitrov">
+        <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    </head>
+    <style>
+        body{
+            background: #0e0e0e;
+            overflow: hidden;
+        }
+
+        .ayy{
+            width: 99%;
+        }
+    </style>
+    <body>
+        <div class="ayy">
+        <canvas id="myChart" width="1200px" height="600px"></canvas>
+        </div>
+        <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ dates|safe }},
+                datasets: [{
+                    label: 'Спирания за деня: ',
+                    data: {{ values|safe }},
+                    fill: false,
+                    borderColor: [
+                        'rgba(255, 255, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                animation: {
+                    duration: 0, // general animation time
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+        </script>
+    </body>
+</html>
